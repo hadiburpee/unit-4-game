@@ -34,30 +34,30 @@ $(".player").click(function(){
     
     playerChoice = $(this).attr("value");
     
-    var code = $(".landoP").html();
-    var code2 = $(".lukeP").html();
-    var code3 = $(".soloP").html();
-    var code4 = $(".vaderP").html();
+    var landoPic = $(".landoP").html();
+    var lukePic = $(".lukeP").html();
+    var soloPic = $(".soloP").html();
+    var vaderPic = $(".vaderP").html();
 
     //Choosing Character
     if(playerChoice =="Lando"){
-        $(".yourPlayer").replaceWith(code);
-        $(".enemiesToAttack").replaceWith(code2 + code3 + code4);
+        $(".yourPlayer").replaceWith(landoPic);
+        $(".enemiesToAttack").replaceWith(lukePic + soloPic + vaderPic);
     }
 
     if(playerChoice =="Luke"){
-        $(".yourPlayer").replaceWith(code2);
-        $(".enemiesToAttack").replaceWith(code + code3 + code4);
+        $(".yourPlayer").replaceWith(lukePic);
+        $(".enemiesToAttack").replaceWith(landoPic + soloPic + vaderPic);
     }
     
     if(playerChoice =="Solo"){      
-        $(".yourPlayer").replaceWith(code3);
-        $(".enemiesToAttack").replaceWith(code + code2 + code4);
+        $(".yourPlayer").replaceWith(soloPic);
+        $(".enemiesToAttack").replaceWith(landoPic + lukePic + vaderPic);
     }
 
     if(playerChoice =="Vader"){  
-        $(".yourPlayer").replaceWith(code4);
-        $(".enemiesToAttack").replaceWith(code + code3 + code2); 
+        $(".yourPlayer").replaceWith(vaderPic);
+        $(".enemiesToAttack").replaceWith(landoPic + soloPic + lukePic); 
     }    
     
     $(".playersToChoose").hide();
