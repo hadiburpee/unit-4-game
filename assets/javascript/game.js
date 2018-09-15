@@ -27,10 +27,64 @@ console.log("Lukes HP" + Luke.hp);
 console.log(Luke.hp -= Lando.ap);
 
 
+//Can I grab the html and move it to another class?
 $(".player").click(function(){
-
     console.log($(this).attr("value"));
+    
+    playerChoice = $(this).attr("value");
+    
+    //Choosing Character
+    if(playerChoice =="Lando"){
 
+        var code = $(".landoP").html();
+        var code2 = $(".lukeP").html();
+        var code3 = $(".soloP").html();
+        var code4 = $(".vaderP").html();
+        console.log(code2);
+        $(".yourPlayer").replaceWith(code);
+        $(".enemiesToAttack").replaceWith(code2 + code3 + code4);
+    
+    }
+
+    if(playerChoice =="Luke"){
+
+        var code = $(".landoP").html();
+        var code2 = $(".lukeP").html();
+        var code3 = $(".soloP").html();
+        var code4 = $(".vaderP").html();
+
+        $(".yourPlayer").replaceWith(code2);
+        $(".enemiesToAttack").replaceWith(code + code3 + code4);
+        
+        }
+    
+    if(playerChoice =="Solo"){
+
+        var code = $(".landoP").html();
+        var code2 = $(".lukeP").html();
+        var code3 = $(".soloP").html();
+        var code4 = $(".vaderP").html();
+        
+        $(".yourPlayer").replaceWith(code3);
+        $(".enemiesToAttack").replaceWith(code + code2 + code4);
+        
+        }
+
+    if(playerChoice =="Vader"){
+
+        var code = $(".landoP").html();
+        var code2 = $(".lukeP").html();
+        var code3 = $(".soloP").html();
+        var code4 = $(".vaderP").html();
+        
+        $(".yourPlayer").replaceWith(code4);
+        $(".enemiesToAttack").replaceWith(code + code3 + code2);
+        
+        }    
+    
+
+    
+    $(".playersToChoose").hide();
 });
 
 

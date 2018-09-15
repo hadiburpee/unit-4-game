@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="assets/javascript/game.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
 </head>
 <body>
  
@@ -16,27 +18,52 @@
 <h1>STAR WARS RPG</h1>
 
 
-<h2>Choose your player</h2>
 
 
-<ul>
-    <div class="player1">
-    <img class ="player" value="Lando" src="assets/images/Lando.jpg">
-    <p class="char">Lando</p>
+<div class="container">
+
+    <div class="row">    
+    
+        <div class="col-xl-3">    
+                <h6>Choose your player</h6>
+            <ul class = "playersToChoose">
+            <div class = "landoP">
+                <img class ="player" value="Lando" src="assets/images/Lando.jpg"><p class="char">Lando</p>
+            </div>
+            <div class = "lukeP">
+                <img class ="player" value="Luke" src="assets/images/Luke.jpg"><p class="char">Luke</p>
+            </div>
+            <div class = "soloP">
+                <img class ="player" value="Solo" src="assets/images/Solo.jpg"><p class="char">Solo</p>
+            </div>
+            <div class = "vaderP">
+                <img class ="player" value="Vader" src="assets/images/Vader.jpg"><p class="char">Vader</p>
+            </div>
+
+            </ul>
+        </div>
+        
+        <div class="col-xl-3">
+            <h6>Your Player</h6>
+            <div class = "yourPlayer"></div>
+        </div>
+
+        <div class="col-xl-3">
+            <h6>Choose Enemy To Attack</h6>
+            
+            <ul class = "enemiesToAttack">
+
+            </ul>
+        </div>
+
+        <div class="col-xl-3">
+            <h6>Defender</h6>
+            <div class = "defender"></div>
+        </div>        
+
+    </div>
 
 </div>
-    <img class ="player" value="Luke" src="assets/images/Luke.jpg">
-    <p class="char">Luke</p>
-
-    <img class ="player" value="Solo" src="assets/images/Solo.jpg">
-    <p class="char">Solo</p>
-
-    <img class ="player" value="Vader" src="assets/images/Vader.jpg">
-    <p class="char">Vader</p>
-
-</ul>
-
-
 
 
 
