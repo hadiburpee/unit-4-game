@@ -15,6 +15,7 @@ var startingAP;
 //Code within the ready will only run once the DOM is ready.
 $(document).ready(function(){
 
+    //testing stuff
 startingAP = Lando.ap
 console.log(Lando.name);
 console.log(Lando.ca); 
@@ -27,64 +28,52 @@ console.log("Lukes HP" + Luke.hp);
 console.log(Luke.hp -= Lando.ap);
 
 
-//Can I grab the html and move it to another class?
+//Can I grab the html and move it to another class? yes I can.
 $(".player").click(function(){
     console.log($(this).attr("value"));
     
     playerChoice = $(this).attr("value");
     
+    var code = $(".landoP").html();
+    var code2 = $(".lukeP").html();
+    var code3 = $(".soloP").html();
+    var code4 = $(".vaderP").html();
+
     //Choosing Character
     if(playerChoice =="Lando"){
-
-        var code = $(".landoP").html();
-        var code2 = $(".lukeP").html();
-        var code3 = $(".soloP").html();
-        var code4 = $(".vaderP").html();
-        console.log(code2);
         $(".yourPlayer").replaceWith(code);
         $(".enemiesToAttack").replaceWith(code2 + code3 + code4);
-    
     }
 
     if(playerChoice =="Luke"){
-
-        var code = $(".landoP").html();
-        var code2 = $(".lukeP").html();
-        var code3 = $(".soloP").html();
-        var code4 = $(".vaderP").html();
-
         $(".yourPlayer").replaceWith(code2);
         $(".enemiesToAttack").replaceWith(code + code3 + code4);
-        
-        }
+    }
     
-    if(playerChoice =="Solo"){
-
-        var code = $(".landoP").html();
-        var code2 = $(".lukeP").html();
-        var code3 = $(".soloP").html();
-        var code4 = $(".vaderP").html();
-        
+    if(playerChoice =="Solo"){      
         $(".yourPlayer").replaceWith(code3);
         $(".enemiesToAttack").replaceWith(code + code2 + code4);
-        
-        }
+    }
 
-    if(playerChoice =="Vader"){
-
-        var code = $(".landoP").html();
-        var code2 = $(".lukeP").html();
-        var code3 = $(".soloP").html();
-        var code4 = $(".vaderP").html();
-        
+    if(playerChoice =="Vader"){  
         $(".yourPlayer").replaceWith(code4);
-        $(".enemiesToAttack").replaceWith(code + code3 + code2);
-        
-        }    
-    
-
+        $(".enemiesToAttack").replaceWith(code + code3 + code2); 
+    }    
     
     $(".playersToChoose").hide();
+
+//choose enemy    
+$(".player").click(function(){
+
+    enemy1 = $(this).attr("value");
+
+    if(enemy1 == "Luke"){
+        var dode = $(".lukeP").html();
+        $(".defender").replaceWith(dode);
+        //need to hide luke
+    }
+});
+
 });
 
 
