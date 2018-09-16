@@ -83,21 +83,21 @@ $(".player").click(function(){
     if(enemy == "Lando"){
         enemy = Lando;
         $(".defender").append(landoPic);
-        
+        //need to hide
     }
 
     if(enemy == "Luke"){
-        enemy = Luke;
-
+        enemy = Luke;        
         $(".defender").append(lukePic);
-        //need to hide luke
+        $(".enemiesToAttack .luke").hide();
+        //need to hide name and HP too
     }
 
     if(enemy == "Solo"){
         enemy = Solo;
 
         $(".defender").append(soloPic);
-        //need to hide luke
+        //need to hide 
     }
 
     if(enemy == "Vader"){
@@ -105,20 +105,28 @@ $(".player").click(function(){
         enemy
         
         $(".defender").append(vaderPic);
-        //need to hide luke
+        //need to hide 
     }
 
 });
 
+//Attack enemy
 $(".attackBtn").click(function(){
 
 
     enemy.hp-=startingAP;
     startingAP += playerChoice.ap;
     playerChoice.hp-=enemy.ca;
+    $(".yourPlayer .hp").html(playerChoice.hp);
+    $(".defender .hp").html(enemy.hp);
+
+
+    //write code to change HP?
 
     if(playerChoice.hp <= 0){
         //set up reset game function
+        loss = loss+1;
+        rst();
     }
 
     else if(enemy.hp <= 0){
@@ -126,15 +134,18 @@ $(".attackBtn").click(function(){
         //replace with next Enemy
     }
 
-
     console.log("Lando AP" + startingAP);
     console.log("Enemy HP" + enemy.hp);
     console.log("Lando HP" + playerChoice.hp);
 
-
-
-
 });
+
+//this resets the game to zero if the player wins or loses.
+function rst(){
+
+
+
+};
 
 
 });
