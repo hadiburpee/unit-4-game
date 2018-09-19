@@ -8,9 +8,10 @@ var Solo = {name: "Han_Solo", hp: 150, ap: 5, ca: 25};
 var Vader = {name: "Darth_Vader", hp: 200, ap: 10, ca: 20};
 var playerChoice;
 var didPlayerChoose = false;
+var enemyChosen = 0;
 var enemy;
 var wins = 0;
-var loses = 0;
+var losses = 0;
 var startingAP = 0;
 var incrementAP = 0;
 
@@ -63,20 +64,15 @@ $(".playersToChoose .player").click(function(){
         $(".enemiesToAttack").append(landoPic, soloPic, lukePic);
         didPlayerChoose = true;
     }    
-    // startingAP = playerChoice.ap;
+    startingAP = playerChoice.ap;
     // incrementAP = playerChoice.ap;
     // $(".playersToChoose").hide();
     console.log(didPlayerChoose);
     }
-}); //end of playerchoose click
-
-
-   
-//choose enemy 
-
-       
-$(".player").click(function(){
-
+    else{
+        
+// $(".player").click(function(){
+    if(enemyChosen < 4){
     enemy = $(this).attr("value");
     var landoPicE = $(".enemiesToAttack .landoP");
     var lukePicE = $(".enemiesToAttack .lukeP");
@@ -113,15 +109,38 @@ $(".player").click(function(){
         $(".defender").append(vaderPicE);
       
     }
-
-    });//End of Enemy c
+    }
+    enemyChosen++;
+    console.log(enemyChosen);
+    // });//End of Enemy c
+    }
+});
 
     //Attack enemy
 $(".attackBtn").click(function(){
     console.log("Player" + playerChoice.name);
     console.log("Enemy" + enemy.name);
 
+    enemy.hp-=startingAP;
+    startingAP+=playerChoice.ap;
+    playerChoice.hp-=enemy.ca;
 
+    $(".defender .hp").html(enemy.hp);
+    $(".yourPlayer .hp").html(playerChoice.hp);
+
+
+    if(enemy.hp < 1){
+        $(".defender").html(" ");
+       
+    }
+
+    if(playerChoice.hp < 1){
+        $(".yourPlayer").html("You Lose");
+        losses++;
+        $(".losses").html("Losses: " + losses);
+        console.log(losses);
+
+    }
 
     });
 
