@@ -3,7 +3,7 @@
 //Should this be one Object?
 
 var Lando = {name: "Lando_Calrissian", hp: 175, ap: 6, ca: 15};
-var Luke = {name: "Luke_Skywalker", hp: 150, ap: 7, ca: 7};
+var Luke = {name: "Luke_Skywalker", hp: 150, ap: 7, ca: 300};//set luke CA to 300 to test losing
 var Solo = {name: "Han_Solo", hp: 150, ap: 5, ca: 25};
 var Vader = {name: "Darth_Vader", hp: 200, ap: 10, ca: 20};
 var playerChoice;
@@ -22,8 +22,10 @@ $(document).ready(function(){
 //Can I grab the html and move it to another class? yes I can.
 
 
-
+//click function for choose players and enemies
 $(".playersToChoose .player").click(function(){
+
+    //conditional for if player is not yet chosen.
     if(didPlayerChoose == false){
 
     console.log($(this).attr("value"));
@@ -35,7 +37,7 @@ $(".playersToChoose .player").click(function(){
     var soloPic = $(".playersToChoose .soloP");
     var vaderPic = $(".playersToChoose .vaderP");
 
-    //Choosing Character
+    //Choosing Character conditional
     if(playerChoice =="Lando"){
         playerChoice = Lando;
         $(".yourPlayer").append(landoPic);
@@ -65,10 +67,11 @@ $(".playersToChoose .player").click(function(){
         didPlayerChoose = true;
     }    
     startingAP = playerChoice.ap;
-    // incrementAP = playerChoice.ap;
-    // $(".playersToChoose").hide();
     console.log(didPlayerChoose);
+
     }
+
+//conditional for once a player chooses his own player.  Now he can choose the enemy
     else{
         
 // $(".player").click(function(){
@@ -112,11 +115,12 @@ $(".playersToChoose .player").click(function(){
     }
     enemyChosen++;
     console.log(enemyChosen);
-    // });//End of Enemy c
+//Enemy is now stored, and there is an enemy chosen counter.
     }
 });
 
-    //Attack enemy
+
+//Attack enemy function
 $(".attackBtn").click(function(){
     console.log("Player" + playerChoice.name);
     console.log("Enemy" + enemy.name);
@@ -125,15 +129,18 @@ $(".attackBtn").click(function(){
     startingAP+=playerChoice.ap;
     playerChoice.hp-=enemy.ca;
 
+    //displays updated stats as the attack button is clicked.
     $(".defender .hp").html(enemy.hp);
     $(".yourPlayer .hp").html(playerChoice.hp);
 
 
+    //removes the defender code, may need to fix this
     if(enemy.hp < 1){
         $(".defender").html(" ");
        
     }
 
+    //should update losses once you lose, but not working
     if(playerChoice.hp < 1){
         $(".yourPlayer").html("You Lose");
         losses++;
