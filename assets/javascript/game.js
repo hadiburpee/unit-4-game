@@ -7,9 +7,8 @@ var Luke = {name: "Luke_Skywalker", hp: 150, ap: 7, ca: 7};
 var Solo = {name: "Han_Solo", hp: 150, ap: 5, ca: 25};
 var Vader = {name: "Darth_Vader", hp: 200, ap: 10, ca: 20};
 var playerChoice;
+var didPlayerChoose = false;
 var enemy;
-var enemy2;
-var enemy3;
 var wins = 0;
 var loses = 0;
 var startingAP = 0;
@@ -20,7 +19,12 @@ var incrementAP = 0;
 $(document).ready(function(){
 
 //Can I grab the html and move it to another class? yes I can.
-$(".player").click(function(){
+
+
+
+$(".playersToChoose .player").click(function(){
+    if(didPlayerChoose == false){
+
     console.log($(this).attr("value"));
     playerChoice = $(this).attr("value");
     console.log(playerChoice);
@@ -35,6 +39,7 @@ $(".player").click(function(){
         playerChoice = Lando;
         $(".yourPlayer").append(landoPic);
         $(".enemiesToAttack").append(lukePic, soloPic, vaderPic);
+        didPlayerChoose = true;
         
     }
 
@@ -42,79 +47,81 @@ $(".player").click(function(){
         playerChoice = Luke;
         $(".yourPlayer").append(lukePic);
         $(".enemiesToAttack").append(landoPic, soloPic, vaderPic);
-        
+        didPlayerChoose = true;
     }
     
     else if(playerChoice =="Solo"){
         playerChoice = Solo;      
         $(".yourPlayer").append(soloPic);
         $(".enemiesToAttack").append(landoPic, lukePic, vaderPic);
-        
+        didPlayerChoose = true;
     }
 
     else if(playerChoice =="Vader"){
         playerChoice = Vader;  
         $(".yourPlayer").append(vaderPic);
         $(".enemiesToAttack").append(landoPic, soloPic, lukePic);
-         
+        didPlayerChoose = true;
     }    
-    startingAP = playerChoice.ap;
+    // startingAP = playerChoice.ap;
     // incrementAP = playerChoice.ap;
     // $(".playersToChoose").hide();
-    
+    console.log(didPlayerChoose);
+    }
 }); //end of playerchoose click
 
-    //choose enemy    
+
+   
+//choose enemy 
+
+       
 $(".player").click(function(){
 
     enemy = $(this).attr("value");
-    var landoPic = $(".enemiesToAttack .landoP");
-    var lukePic = $(".enemiesToAttack .lukeP");
-    var soloPic = $(".enemiesToAttack .soloP");
-    var vaderPic = $(".enemiesToAttack .vaderP");
+    var landoPicE = $(".enemiesToAttack .landoP");
+    var lukePicE = $(".enemiesToAttack .lukeP");
+    var soloPicE = $(".enemiesToAttack .soloP");
+    var vaderPicE = $(".enemiesToAttack .vaderP");
     
+    console.log(landoPicE);
     console.log("Enemy is " + enemy);  
 
     if(enemy == "Lando"){
         enemy = Lando;
-        $(".defender").append(landoPic);
-        // $(".enemiesToAttack .lando").hide();
-        //need to hide
+
+        $(".defender").append(landoPicE);
+
     }
 
     if(enemy == "Luke"){
         enemy = Luke;
              
-        $(".defender").append(lukePic);
-        // $(".enemiesToAttack .luke").hide();
-        //need to hide name and HP too
+        $(".defender").append(lukePicE);
+
     }
 
     if(enemy == "Solo"){
         enemy = Solo;
 
-        $(".defender").append(soloPic);
-        //need to hide 
+        $(".defender").append(soloPicE);
+     
     }
 
     if(enemy == "Vader"){
         enemy = Vader;
         
-        $(".defender").append(vaderPic);
-        //need to hide 
+        $(".defender").append(vaderPicE);
+      
     }
 
     });//End of Enemy c
 
     //Attack enemy
 $(".attackBtn").click(function(){
-    enemy.hp-=startingAP;
-    startingAP+=playerChoice.ap;
-    playerChoice.hp-=enemy.ca;
+    console.log("Player" + playerChoice.name);
+    console.log("Enemy" + enemy.name);
 
-    console.log("enemy HP" + enemy.hp);
-    console.log("player AP" + playerChoice.ap);
-    console.log("player HP" + playerChoice.hp);
+
 
     });
 
