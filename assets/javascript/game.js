@@ -82,8 +82,7 @@ $(".playersToChoose .player").click(function(){
         var lukePicE = $(".enemiesToAttack .lukeP");
         var soloPicE = $(".enemiesToAttack .soloP");
         var vaderPicE = $(".enemiesToAttack .vaderP");
-    
-        console.log(landoPicE);
+        
         console.log("Enemy is " + enemy);  
 
         if(enemy == "Lando"){
@@ -112,6 +111,12 @@ $(".playersToChoose .player").click(function(){
         
         $(".defender").append(vaderPicE);
       
+        }
+
+        //will not let the player select themselves as the enemy, ie they cannot attack themselves
+        if(enemy == playerChoice){
+            enemySelected = false;
+            return;
         }
 
         
@@ -170,7 +175,10 @@ if(enemySelected == true){
     
     });
 
+function reset(){
 
+    
+}
 //Need to write reset function
 
 // }); //end of first click function
