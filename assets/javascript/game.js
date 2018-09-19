@@ -15,6 +15,10 @@ var win = 0;
 var loss = 0;
 var startingAP = 0;
 var incrementAP = 0;
+var playerHP = 0;
+var enemyHP = 0;
+
+
 
 
 //Code within the ready will only run once the DOM is ready.
@@ -22,9 +26,29 @@ $(document).ready(function(){
 
 //Can I grab the html and move it to another class? yes I can.
 
+//need to work this out
+function reset(){
+
+    var yourPlay = $(".yourPlayer").html();
+    $(".playersToChoose").append(yourPlay);
+    $(".yourPlayer").html(" ");
+    $(".playersToChoose").show();
+    $(".landoP .hp").html(Lando.hp);
+    $(".lukeP .hp").html(Luke.hp);
+    $(".soloP .hp").html(Solo.hp);
+    $(".vaderP .hp").html(Vader.hp);
+    startingAP = 0;
+    playerHP = 0;
+    enemyHP = 0;
+    didPlayerChoose = false;
+    enemySelected = false;
+
+    
+}
+
 
 //click function for choose players and enemies
-$(".playersToChoose .player").click(function(){
+$(".player").click(function(){
 
     //conditional for if player is not yet chosen.
     if(didPlayerChoose == false){
@@ -68,8 +92,9 @@ $(".playersToChoose .player").click(function(){
         didPlayerChoose = true;
     }    
     startingAP = playerChoice.ap;
+    playerHP = playerChoice.hp;
     console.log(didPlayerChoose);
-
+    
     }
 
 //conditional for once a player chooses his own player.  Now he can choose the enemy
@@ -119,13 +144,16 @@ $(".playersToChoose .player").click(function(){
             return;
         }
 
-        
+    //this makes it so you cannot select more than one enemy at a time    
     enemySelected = true;
-    }
+    enemyHP = enemy.hp;
+    } //enemy selected bracket
 
     
-//Enemy is now stored, and there is an enemy chosen counter.
-    }
+
+    }//else bracket
+
+
 });
 
 
@@ -134,39 +162,49 @@ $(".attackBtn").click(function(){
     console.log("Player" + playerChoice.name);
     console.log("Enemy" + enemy.name);
 
+//maybe I can leave hte original values and do it like the starting AP
 if(enemySelected == true){
-    enemy.hp-=startingAP;
+    enemyHP-=startingAP;
     startingAP+=playerChoice.ap;
-    playerChoice.hp-=enemy.ca;
+    playerHP-=enemy.ca;
 
     //displays updated stats as the attack button is clicked.
-    $(".defender .hp").html(enemy.hp);
-    $(".yourPlayer .hp").html(playerChoice.hp);
+    $(".defender .hp").html(enemyHP);
+    $(".yourPlayer .hp").html(playerHP);
 
 }
     //removes the defender code, may need to fix this
-    if(enemy.hp < 1 && enemySelected == true){
+    if(enemyHP < 1 && enemySelected == true){
+
+
+        var enemyMove = $(".defender").html();
+        $(".playersToChoose").append(enemyMove);
+        $(".playersToChoose").hide();
         $(".defender").html(" ");
+
         enemySelected = false;
         enemy.ca = 0;
         enemyChosen++;
         console.log(enemyChosen);
         if(enemyChosen == 3){
-            $(".yourPlayer").html("You Lose");
+            // $(".yourPlayer").html("You Lose");
             win = win + 1;
             $(".wins").html("Wins: " + win);
             console.log("Win" + win);
+            reset();
+            enemySelected = false;
         }
         // console.log("is an enemy selected " + enemySelected);
     }
 
     //when you win, it still says you lose
     // console.log(playerChoice.name + " : your player")
-    if(playerChoice.hp < 1){
-        $(".yourPlayer").html("You Lose");
+    else if(playerHP < 1 && enemySelected == true){
+        // $(".yourPlayer").html("You Lose");
         loss = loss + 1;
         $(".losses").html("Losses: " + loss);
         console.log("loss" + loss);
+        reset();
 
     }
 
@@ -175,10 +213,7 @@ if(enemySelected == true){
     
     });
 
-function reset(){
 
-    
-}
 //Need to write reset function
 
 // }); //end of first click function
