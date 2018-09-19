@@ -2,16 +2,17 @@
 
 //Should this be one Object?
 
-var Lando = {name: "Lando_Calrissian", hp: 175, ap: 6, ca: 15};
-var Luke = {name: "Luke_Skywalker", hp: 150, ap: 7, ca: 300};//set luke CA to 300 to test losing
+var Lando = {name: "Lando_Calrissian", hp: 175, ap: 20, ca: 15};
+var Luke = {name: "Luke_Skywalker", hp: 150, ap: 7, ca: 7};//set luke CA to 300 to test losing
 var Solo = {name: "Han_Solo", hp: 150, ap: 5, ca: 25};
-var Vader = {name: "Darth_Vader", hp: 200, ap: 10, ca: 20};
+var Vader = {name: "Darth_Vader", hp: 200, ap: 10, ca: 10};
 var playerChoice;
 var didPlayerChoose = false;
+var enemySelected = false;
 var enemyChosen = 0;
 var enemy;
-var wins = 0;
-var losses = 0;
+var win = 0;
+var loss = 0;
 var startingAP = 0;
 var incrementAP = 0;
 
@@ -75,46 +76,49 @@ $(".playersToChoose .player").click(function(){
     else{
         
 // $(".player").click(function(){
-    if(enemyChosen < 4){
-    enemy = $(this).attr("value");
-    var landoPicE = $(".enemiesToAttack .landoP");
-    var lukePicE = $(".enemiesToAttack .lukeP");
-    var soloPicE = $(".enemiesToAttack .soloP");
-    var vaderPicE = $(".enemiesToAttack .vaderP");
+    if(enemySelected == false){
+        enemy = $(this).attr("value");
+        var landoPicE = $(".enemiesToAttack .landoP");
+        var lukePicE = $(".enemiesToAttack .lukeP");
+        var soloPicE = $(".enemiesToAttack .soloP");
+        var vaderPicE = $(".enemiesToAttack .vaderP");
     
-    console.log(landoPicE);
-    console.log("Enemy is " + enemy);  
+        console.log(landoPicE);
+        console.log("Enemy is " + enemy);  
 
-    if(enemy == "Lando"){
+        if(enemy == "Lando"){
         enemy = Lando;
 
         $(".defender").append(landoPicE);
 
-    }
+        }
 
-    if(enemy == "Luke"){
+        if(enemy == "Luke"){
         enemy = Luke;
              
         $(".defender").append(lukePicE);
 
-    }
+        }
 
-    if(enemy == "Solo"){
+        if(enemy == "Solo"){
         enemy = Solo;
 
         $(".defender").append(soloPicE);
      
-    }
+        }
 
-    if(enemy == "Vader"){
+        if(enemy == "Vader"){
         enemy = Vader;
         
         $(".defender").append(vaderPicE);
       
+        }
+
+        
+    enemySelected = true;
     }
-    }
-    enemyChosen++;
-    console.log(enemyChosen);
+
+    
 //Enemy is now stored, and there is an enemy chosen counter.
     }
 });
@@ -125,6 +129,7 @@ $(".attackBtn").click(function(){
     console.log("Player" + playerChoice.name);
     console.log("Enemy" + enemy.name);
 
+if(enemySelected == true){
     enemy.hp-=startingAP;
     startingAP+=playerChoice.ap;
     playerChoice.hp-=enemy.ca;
@@ -133,26 +138,40 @@ $(".attackBtn").click(function(){
     $(".defender .hp").html(enemy.hp);
     $(".yourPlayer .hp").html(playerChoice.hp);
 
-
+}
     //removes the defender code, may need to fix this
-    if(enemy.hp < 1){
+    if(enemy.hp < 1 && enemySelected == true){
         $(".defender").html(" ");
-       
+        enemySelected = false;
+        enemy.ca = 0;
+        enemyChosen++;
+        console.log(enemyChosen);
+        if(enemyChosen == 3){
+            $(".yourPlayer").html("You Lose");
+            win = win + 1;
+            $(".wins").html("Wins: " + win);
+            console.log("Win" + win);
+        }
+        // console.log("is an enemy selected " + enemySelected);
     }
 
-    //should update losses once you lose, but not working
+    //when you win, it still says you lose
+    // console.log(playerChoice.name + " : your player")
     if(playerChoice.hp < 1){
         $(".yourPlayer").html("You Lose");
-        losses++;
-        $(".losses").html("Losses: " + losses);
-        console.log(losses);
+        loss = loss + 1;
+        $(".losses").html("Losses: " + loss);
+        console.log("loss" + loss);
 
     }
 
+
+
+    
     });
 
 
-
+//Need to write reset function
 
 // }); //end of first click function
 
