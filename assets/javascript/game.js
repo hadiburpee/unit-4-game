@@ -42,13 +42,16 @@ function reset(){
     enemyHP = 0;
     didPlayerChoose = false;
     enemySelected = false;
+    enemyChosen = 0;
 
     
 }
 
 
 //click function for choose players and enemies
-$(".player").click(function(){
+// $(".player").click(function(){
+
+$('body').on('click', '.player', function(){
 
     //conditional for if player is not yet chosen.
     if(didPlayerChoose == false){
@@ -138,6 +141,8 @@ $(".player").click(function(){
       
         }
 
+        console.log(enemy);
+
         //will not let the player select themselves as the enemy, ie they cannot attack themselves
         if(enemy == playerChoice){
             enemySelected = false;
@@ -171,6 +176,10 @@ if(enemySelected == true){
     //displays updated stats as the attack button is clicked.
     $(".defender .hp").html(enemyHP);
     $(".yourPlayer .hp").html(playerHP);
+    console.log("Enemy HP: " + enemyHP);
+    console.log("Player HP: " + playerHP);
+    console.log("Player AP: "+ startingAP);
+    console.log("Enemy CA: " + enemy.ca);
 
 }
     //removes the defender code, may need to fix this
@@ -183,7 +192,7 @@ if(enemySelected == true){
         $(".defender").html(" ");
 
         enemySelected = false;
-        enemy.ca = 0;
+        // enemy.ca = 0; this messed up the original settings.
         enemyChosen++;
         console.log(enemyChosen);
         if(enemyChosen == 3){
@@ -197,13 +206,22 @@ if(enemySelected == true){
         // console.log("is an enemy selected " + enemySelected);
     }
 
-    //when you win, it still says you lose
-    // console.log(playerChoice.name + " : your player")
+    
+    //loss conditional
     else if(playerHP < 1 && enemySelected == true){
         // $(".yourPlayer").html("You Lose");
         loss = loss + 1;
         $(".losses").html("Losses: " + loss);
         console.log("loss" + loss);
+        
+        var enemyToMove = $(".enemiesToAttack").html();
+        var defenderToMove = $(".defender").html();
+
+        $(".playersToChoose").append(enemyToMove);
+        $(".playersToChoose").append(defenderToMove);
+        $(".enemiesToAttack").html(" ");
+        $(".defender").html(" ");
+
         reset();
 
     }
