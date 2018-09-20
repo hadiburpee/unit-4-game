@@ -1,1 +1,3 @@
 # unit-4-game
+
+This is the star wars RPG.  I generally followed the instructional video on how to create.  You can choose your character and cannot rechoose.  The remaining players automatically go to the enemies to attack column.  You can choose one of the enmeies at a time to defend and you can attack them.  You win if you can defeat all the players.  You lose if your HP goes to 0 before you defeat all the players.  If you win or lose, the game resets and you can start playing again.
