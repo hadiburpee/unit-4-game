@@ -2,10 +2,10 @@
 
 //Should this be one Object?
 
-var Lando = {name: "Lando_Calrissian", hp: 175, ap: 20, ca: 15};
-var Luke = {name: "Luke_Skywalker", hp: 150, ap: 7, ca: 7};//set luke CA to 300 to test losing
-var Solo = {name: "Han_Solo", hp: 150, ap: 5, ca: 25};
-var Vader = {name: "Darth_Vader", hp: 200, ap: 10, ca: 10};
+var Lando = {name: "Lando_Calrissian", hp: 130, ap: 15, ca: 20};
+var Luke = {name: "Luke_Skywalker", hp: 145, ap: 20, ca: 30};//set luke CA to 300 to test losing
+var Solo = {name: "Han_Solo", hp: 150, ap: 15, ca: 15};
+var Vader = {name: "Darth_Vader", hp: 160, ap: 10, ca: 10};
 var playerChoice;
 var didPlayerChoose = false;
 var enemySelected = false;
@@ -194,7 +194,7 @@ if(enemySelected == true){
         enemySelected = false;
         // enemy.ca = 0; this messed up the original settings.
         enemyChosen++;
-        console.log(enemyChosen);
+        console.log("Enemies: " + enemyChosen);
         if(enemyChosen == 3){
             // $(".yourPlayer").html("You Lose");
             win = win + 1;
@@ -208,7 +208,7 @@ if(enemySelected == true){
 
     
     //loss conditional
-    else if(playerHP < 1 && enemySelected == true){
+    if(playerHP < 1 && enemySelected == true || playerHP < 1 && enemyChosen == 2){
         // $(".yourPlayer").html("You Lose");
         loss = loss + 1;
         $(".losses").html("Losses: " + loss);
